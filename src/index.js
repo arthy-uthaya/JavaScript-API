@@ -46,11 +46,20 @@ app.get("/openingHoursWithDelay", (req, res) => {
 
  //:::::::::: EXO3
 
+
+
  //openingHours  est un objet --> pointeur par let et non par const
  //openingHours = nouveau objet
  //openingHours import dans index.js
 
-
+ const addHours = (param)=>{
+  const {days,...hours} = param;
+  openingHours.map(el => {
+      if(days.includes(el.day)){
+          el.hours.push(hours)
+      }
+  })
+}
 
  app.get("/addHours", (req, res) => {
   const paramObject = JSON.parse(req.query.param)
@@ -58,23 +67,22 @@ app.get("/openingHoursWithDelay", (req, res) => {
   res.send(openingHours);
 });
 
-const addHours = ({from, to, days}) => {
-  const tableau2 =  openingHours.map(e1 => {
-    const tab = {} ;
-    tab[e1.days] = 
-    //condition boolean --> includes
+// const addHours = ({from, to, days}) => {
+//   const tableau2 =  openingHours.map(e1 => {
+//     const nvtab = {} ;
+//     tab[e1.days] = e1.hours;
+//     //condition boolean --> includes
     
-    });
+//     }),
 
-    // console.log(e1);
-  }
+//     // console.log(e1);
+//   }
+  
     
-  )}
-    
-    //condition booléen  
-    // e2= openingHours.map(openingHours.days.hours.from);
-    // e3= openingHours.map(openingHours.hours.days.hours.to);
+//     //condition booléen  
+//     // e2= openingHours.map(openingHours.days.hours.from);
+//     // e3= openingHours.map(openingHours.hours.days.hours.to);
 
-    //.map --> sur les jours existant  
+//     //.map --> sur les jours existant  
 
 addHours({ from: "8:30", to: "12:00", days: ["MONDAY", "TUESDAY"] });
